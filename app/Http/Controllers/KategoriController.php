@@ -85,9 +85,14 @@ class KategoriCOntroller extends Controller
      * @param  \App\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kategori $kategori)
+    public function update(Request $request, $slug)
     {
-        //
+        $kategori = Kategori::where('slug',$slug)->first();
+        $kategori->nama = $request->nama;
+        $kategori->slug = Str::slug($request->nama);
+        $kategori->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -96,8 +101,11 @@ class KategoriCOntroller extends Controller
      * @param  \App\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kategori $kategori)
+    public function destroy(Kategori $kategori, $slug)
     {
-        //
+        $kategori = Kategori::where('slug',$slug)->first();
+        $kategori->delete();
+
+        return redirect()->back();
     }
 }

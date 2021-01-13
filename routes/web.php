@@ -32,6 +32,8 @@ Route::group(['middleware' => ['auth','role:super admin|admin']], function () {
 
     Route::get('dashboard/kategori', 'KategoriController@index')->name('kategori.admin');
     Route::post('dashboard/kategori', 'KategoriController@store')->name('tambahkategori.admin');
+    Route::put('dashboard/kategori/{slug}', 'KategoriController@update')->name('updatekategori.admin');
+    Route::delete('dashboard/kategori/{slug}', 'KategoriController@destroy')->name('hapuskategori.admin');
 });
 
 

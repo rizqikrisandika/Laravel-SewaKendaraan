@@ -86,7 +86,8 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 {{-- form --}}
-                                                                <form action="{{ route('tambahkategori.admin') }}"
+                                                                <form
+                                                                    action="{{ route('updatekategori.admin',['slug'=>$data->slug]) }}"
                                                                     method="post">
                                                                     @csrf
                                                                     @method('put')
@@ -110,9 +111,44 @@
                                                 </div>
                                                 {{-- endModal --}}
 
-                                                <form class="d-inline" action="" method="post">
-                                                    <button type="submit" class="btn btn-danger">hapus</button>
-                                                </form>
+                                                <button type="submit" class="btn btn-danger" data-toggle="modal"
+                                                    data-target="#modalHapusKategori{{ $data->slug }}">hapus</button>
+
+                                                {{-- Modal Hapus --}}
+
+                                                <div class="modal fade" id="modalHapusKategori{{ $data->slug }}"
+                                                    tabindex="-1" role="dialog"
+                                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">Konfirmasi Hapus
+                                                                    Kategori</h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Apakah anda yakin untuk menghapus ketegori {{ $data->nama }}?
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                {{-- form --}}
+                                                                <form
+                                                                    action="{{ route('hapuskategori.admin',['slug'=>$data->slug]) }}"
+                                                                    method="post">
+                                                                    @csrf
+                                                                    @method('delete')
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-dismiss="modal">Tidak</button>
+                                                                    <button type="submit"
+                                                                        class="btn btn-danger">Ya</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {{-- endModal --}}
                                             </td>
 
                                         </tr>
