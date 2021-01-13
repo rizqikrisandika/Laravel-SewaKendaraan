@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class KategoriCOntroller extends Controller
 {
@@ -14,7 +15,7 @@ class KategoriCOntroller extends Controller
      */
     public function index()
     {
-        $kategori = Kategori::orderBy('updated_at','desc');
+        $kategori = Kategori::orderBy('updated_at','desc')->paginate(5);
 
         return view('admin.kategori',compact('kategori'));
     }
@@ -37,16 +38,22 @@ class KategoriCOntroller extends Controller
      */
     public function store(Request $request)
     {
-
-        $validator = $request->validate([
+        $rules = [
             'nama' => 'required'
-        ]);
+        ];
+
+        $message = [
+            'required' => ':attribute tidak boleh kosong!'
+        ];
+
+        $request->validate($rules, $message);
 
         $kategori = new Kategori();
-        $kategori->all();
+        $kategori->nama = $request->nama;
+        $kategori->slug = Str::slug($request->nama);
         $kategori->save();
 
-        return redirect()->route('kategori.admin')
+        return redirect()->route('kategori.admin');
     }
 
     /**
