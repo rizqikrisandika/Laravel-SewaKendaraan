@@ -26,9 +26,10 @@ Route::group(['middleware' => ['auth','role:super admin|admin']], function () {
         return view('admin.dashboard');
     })->name('dashboard.admin');
 
-    Route::get('dashboard/kendaraan', function () {
-        return view('admin.kendaraan');
-    })->name('kendaraan.admin');
+    Route::get('dashboard/kendaraan', 'KendaraanController@index')->name('kendaraan.admin');
+    Route::post('dashboard/kendaraan', 'KendaraanController@store')->name('tambahkendaraan.admin');
+    Route::put('dashboard/kendaraan/{slug}', 'KendaraanController@update')->name('updatekendaraan.admin');
+    Route::delete('dashboard/kendaraan/{slug}', 'KendaraanController@destroy')->name('hapuskendaraan.admin');
 
     Route::get('dashboard/kategori', 'KategoriController@index')->name('kategori.admin');
     Route::post('dashboard/kategori', 'KategoriController@store')->name('tambahkategori.admin');

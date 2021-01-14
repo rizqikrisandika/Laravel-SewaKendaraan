@@ -15,6 +15,7 @@
                             data-target="#modalTambahKategori">
                             + Kategori
                         </button>
+
                         {{-- Modal Tambah --}}
                         <div class="modal fade" id="modalTambahKategori" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -67,95 +68,95 @@
                                             <td class="text-bold-500">{{ $kategori->firstItem()+$no }}</td>
                                             <td>{{ $data->nama }}</td>
                                             <td class="text-bold-500">
-                                                <button class="btn btn-warning" data-toggle="modal"
-                                                    data-target="#modalUbahKategori{{ $data->slug }}">edit</button>
-                                                {{-- Modal Ubah --}}
+                                                <button class="btn btn-sm btn-warning" data-toggle="modal"
+                                                    data-target="#modalUbahKategori{{ $data->slug }}"><i class="fa fa-pen"></i></button>
 
-                                                <div class="modal fade" id="modalUbahKategori{{ $data->slug }}"
-                                                    tabindex="-1" role="dialog"
-                                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLongTitle">Ubah
-                                                                    Kategori</h5>
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                {{-- form --}}
-                                                                <form
-                                                                    action="{{ route('updatekategori.admin',['slug'=>$data->slug]) }}"
-                                                                    method="post">
-                                                                    @csrf
-                                                                    @method('put')
-                                                                    <div class="form-group">
-                                                                        <label for="nama">Nama</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="nama" id="nama"
-                                                                            value="{{ $data->nama }}"
-                                                                            placeholder="Motor, Mobil, Shuttle, Bus">
-                                                                    </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">Tutup</button>
-                                                                <button type="submit"
-                                                                    class="btn btn-primary">Simpan</button>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                {{-- endModal --}}
-
-                                                <button type="submit" class="btn btn-danger" data-toggle="modal"
-                                                    data-target="#modalHapusKategori{{ $data->slug }}">hapus</button>
-
-                                                {{-- Modal Hapus --}}
-
-                                                <div class="modal fade" id="modalHapusKategori{{ $data->slug }}"
-                                                    tabindex="-1" role="dialog"
-                                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLongTitle">Konfirmasi Hapus
-                                                                    Kategori</h5>
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                Apakah anda yakin untuk menghapus ketegori {{ $data->nama }}?
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                {{-- form --}}
-                                                                <form
-                                                                    action="{{ route('hapuskategori.admin',['slug'=>$data->slug]) }}"
-                                                                    method="post">
-                                                                    @csrf
-                                                                    @method('delete')
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                        data-dismiss="modal">Tidak</button>
-                                                                    <button type="submit"
-                                                                        class="btn btn-danger">Ya</button>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                {{-- endModal --}}
+                                                <button type="submit" class="btn btn-sm btn-danger" data-toggle="modal"
+                                                    data-target="#modalHapusKategori{{ $data->slug }}"><i class="fa fa-trash"></i></button>
                                             </td>
 
                                         </tr>
+
+                                        {{-- Modal Ubah --}}
+
+                                        <div class="modal fade" id="modalUbahKategori{{ $data->slug }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Ubah
+                                                            Kategori</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        {{-- form --}}
+                                                        <form
+                                                            action="{{ route('updatekategori.admin',['slug'=>$data->slug]) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('put')
+                                                            <div class="form-group">
+                                                                <label for="nama">Nama</label>
+                                                                <input type="text" class="form-control" name="nama"
+                                                                    id="nama" value="{{ $data->nama }}"
+                                                                    placeholder="Motor, Mobil, Shuttle, Bus">
+                                                            </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Tutup</button>
+                                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{-- endModal --}}
+
+                                        {{-- Modal Hapus --}}
+
+                                        <div class="modal fade" id="modalHapusKategori{{ $data->slug }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Konfirmasi
+                                                            Hapus
+                                                            Kategori</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Apakah anda yakin untuk menghapus ketegori {{ $data->nama }}?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        {{-- form --}}
+                                                        <form
+                                                            action="{{ route('hapuskategori.admin',['slug'=>$data->slug]) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Tidak</button>
+                                                            <button type="submit" class="btn btn-danger">Ya</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{-- endModal --}}
+
                                         @endforeach
 
                                     </tbody>
                                 </table>
+
+                                {{ $kategori->links() }}
                             </div>
                         </div>
                     </div>

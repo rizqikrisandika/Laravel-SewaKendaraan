@@ -45,6 +45,11 @@
     color: var(--font-color);
     line-height: 1.5;
 }
+
+[data-theme="dark"] .modal {
+    color: var(--color);
+}
+
 [data-theme="dark"] .topbar{
     background-color: var(--bg-color);
 
@@ -60,10 +65,12 @@
     background-color: var(--bg-submenu-sidebar-color)
 }
 [data-theme="dark"] .card {
-    background-color: var(--bg-card)
+    background-color: var(--bg-card);
+    color: var(--font-color);
 }
 [data-theme="dark"] .card-header {
-    background-color: var(--bg-card)
+    background-color: var(--bg-card);
+    color: var(--font-color);
 }
 [data-theme="dark"] .footer {
     background-color: var(--bg-color)
