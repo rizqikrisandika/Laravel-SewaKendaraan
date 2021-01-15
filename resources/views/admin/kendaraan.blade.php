@@ -91,6 +91,7 @@
                                             <th>PLAT</th>
                                             <th>KATEGORI</th>
                                             <th>HARGA/HARI</th>
+                                            <th>STATUS</th>
                                             <th>AKSI</th>
                                         </tr>
                                     </thead>
@@ -104,6 +105,13 @@
                                             <td class="text-bold-500">{{ $data->plat }}</td>
                                             <td>{{ $data->kategori->nama }}</td>
                                             <td class="text-bold-500">Rp. {{ number_format($data->harga,0,'.','.') }}</td>
+                                            <td>
+                                                @if ($data->status == 1)
+                                                    <span class="badge badge-success">Tersedia</span>
+                                                @else
+                                                    <span class="badge badge-danger">Disewa</span>
+                                                @endif
+                                            </td>
                                             <td class="text-bold-500">
                                                 <button class="btn btn-sm btn-warning" data-toggle="modal"
                                                     data-target="#modalUbahKendaraan{{ $data->slug }}"><i

@@ -65,7 +65,6 @@ class KendaraanController extends Controller
         $extensiGambar = $request->gambar->extension();
         $namaGambar = 'img_'.time().'.'.$extensiGambar;
 
-        // $lokasiGambar = Storage::putFileAs('gambar',$request->gambar,$namaGambar,'public');
         $lokasiGambar = $request->gambar->storeAs('gambar',$namaGambar,'public');
 
         $format_harga = preg_replace('/\D/','',$request->harga);
@@ -76,6 +75,7 @@ class KendaraanController extends Controller
         $kendaraan->plat = $request->plat;
         $kendaraan->harga = $format_harga;
         $kendaraan->gambar = $lokasiGambar;
+        $kendaraan->status = 1;
         $kendaraan->kategori_id = $request->kategori;
         $kendaraan->user_id = $user_id;
         $kendaraan->save();
@@ -136,10 +136,10 @@ class KendaraanController extends Controller
 
             $extensiGambar = $request->gambar->extension();
             $namaGambar = 'img_'.time().'.'.$extensiGambar;
-
             $lokasiGambar = $request->gambar->storeAs('gambar',$namaGambar,'public');
 
             $format_harga = preg_replace('/\D/','',$request->harga);
+            Storage::disk('public')->delete($kendaraan->gambar);
 
             $kendaraan->nama = $request->nama;
             $kendaraan->slug = Str::slug($request->nama);

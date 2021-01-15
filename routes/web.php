@@ -22,9 +22,9 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth','role:super admin|admin']], function () {
 
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard.admin');
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard.admin');
+
+    Route::get('/dashboard/pengguna', 'PenggunaController@index')->name('pengguna.admin');
 
     Route::get('dashboard/kendaraan', 'KendaraanController@index')->name('kendaraan.admin');
     Route::post('dashboard/kendaraan', 'KendaraanController@store')->name('tambahkendaraan.admin');

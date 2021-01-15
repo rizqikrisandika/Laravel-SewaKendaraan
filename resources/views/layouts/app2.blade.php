@@ -121,7 +121,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('kategori.admin') }}" class="items">
+                        <a href="{{ route('pengguna.admin') }}" class="items">
                             <i class="fa fa-user-alt"></i>
                             <span>Pengguna</span>
                         </a>

@@ -20,6 +20,7 @@ class CreateKendaraanTable extends Migration
             $table->string('plat');
             $table->integer('harga');
             $table->string('gambar');
+            $table->string('status');
             $table->foreignId('kategori_id');
             $table->foreignId('user_id');
             $table->timestamps();
