@@ -104,12 +104,13 @@
                                             <td class="text-bold-500">{{ $data->nama }}</td>
                                             <td class="text-bold-500">{{ $data->plat }}</td>
                                             <td>{{ $data->kategori->nama }}</td>
-                                            <td class="text-bold-500">Rp. {{ number_format($data->harga,0,'.','.') }}</td>
+                                            <td class="text-bold-500">Rp. {{ number_format($data->harga,0,'.','.') }}
+                                            </td>
                                             <td>
                                                 @if ($data->status == 1)
-                                                    <span class="badge badge-success">Tersedia</span>
+                                                <span class="badge badge-success">Tersedia</span>
                                                 @else
-                                                    <span class="badge badge-danger">Disewa</span>
+                                                <span class="badge badge-danger">Disewa</span>
                                                 @endif
                                             </td>
                                             <td class="text-bold-500">
@@ -123,12 +124,12 @@
                                         </tr>
 
                                         {{-- Modal Update--}}
-                                        <div class="modal fade" id="modalUbahKendaraan{{ $data->slug }}" tabindex="-1" role="dialog"
-                                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal fade" id="modalUbahKendaraan{{ $data->slug }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLongTitle">Tambah
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Ubah
                                                             Kendaraan</h5>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
@@ -136,54 +137,73 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        {{-- form --}}
-                                                        <form action="{{ route('updatekendaraan.admin',['slug' => $data->slug]) }}"
-                                                            method="post" enctype="multipart/form-data">
-                                                            @csrf
-                                                            @method('put')
-                                                            <div class="form-group">
-                                                                <label for="nama">Nama</label>
-                                                                <input type="text" class="form-control" name="nama"
-                                                                    id="nama" placeholder="Nama Kendaraan"
-                                                                    value="{{ $data->nama }}">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="kategori">Kategori</label>
-                                                                <select class="form-control" name="kategori"
-                                                                    id="kategori">
-                                                                    <option value="{{ $data->kategori_id }}" selected>{{ $data->kategori->nama }}</option>
-                                                                    @foreach ($kategori as $kat)
-                                                                    <option value="{{ $kat->id }}">{{ $kat->nama }}
-                                                                    </option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="exampleFormControlInput1">Plat Nomor</label>
-                                                                <input type="text" class="form-control" name="plat"
-                                                                    id="exampleFormControlInput1"
-                                                                    value="{{ $data->plat }}" placeholder="AB 1234 XX">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="exampleFormControlInput1">Harga/Hari</label>
-                                                                <input type="text" class="form-control" name="harga"
-                                                                    id="rupiah3" value="Rp. {{ number_format($data->harga,0,'.','.') }}"
-                                                                    placeholder="Rp.">
-                                                            </div>
+                                                        <div class="row">
+                                                            <form
+                                                                action="{{ route('updatekendaraan.admin',['slug' => $data->slug]) }}"
+                                                                method="post" enctype="multipart/form-data">
+                                                                @csrf
+                                                                @method('put')
+                                                                <div class="col">
+                                                                    <label
+                                                                        for="exampleFormControlInput1">Gambar</label>
+                                                                    <div class="form-group">
+                                                                        <img src="{{ url(Storage::url($data->gambar)) }}"
+                                                                            style="width: 20vw" alt="">
+                                                                    </div>
 
-                                                            <div class="form-group">
-                                                                <img src="{{ url(Storage::url($data->gambar)) }}" style="width: 150px" alt="">
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="exampleFormControlInput1">Gambar</label>
-                                                                <div class="custom-file">
-                                                                    <input type="file" class="custom-file-input"
-                                                                        name="gambar" id="customFile">
-                                                                    <label class="custom-file-label"
-                                                                        for="customFile">Choose file</label>
+                                                                    <div class="form-group">
+                                                                        <div class="custom-file">
+                                                                            <input type="file" class="custom-file-input"
+                                                                                name="gambar" id="customFile">
+                                                                            <label class="custom-file-label"
+                                                                                for="customFile">Choose file</label>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
+                                                                <div class="col">
+                                                                    <div class="form-group">
+                                                                        <label for="nama">Nama</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="nama" id="nama"
+                                                                            placeholder="Nama Kendaraan"
+                                                                            value="{{ $data->nama }}">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="kategori">Kategori</label>
+                                                                        <select class="form-control" name="kategori"
+                                                                            id="kategori">
+                                                                            <option value="{{ $data->kategori_id }}"
+                                                                                selected>{{ $data->kategori->nama }}
+                                                                            </option>
+                                                                            @foreach ($kategori as $kat)
+                                                                            <option value="{{ $kat->id }}">
+                                                                                {{ $kat->nama }}
+                                                                            </option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="exampleFormControlInput1">Plat
+                                                                            Nomor</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="plat" id="exampleFormControlInput1"
+                                                                            value="{{ $data->plat }}"
+                                                                            placeholder="AB 1234 XX">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label
+                                                                            for="exampleFormControlInput1">Harga/Hari</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="harga" id="rupiah3"
+                                                                            value="Rp. {{ number_format($data->harga,0,'.','.') }}"
+                                                                            placeholder="Rp.">
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+                                                        {{-- form --}}
+
+
+
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"

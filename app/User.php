@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
 use App\Kendaraan;
+use App\Role;
 
 class User extends Authenticatable
 {
@@ -44,4 +45,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Kendaraan::class);
     }
+
+    // public function role()
+    // {
+    //     return $this->belongsToMany(Role::class);
+    // }
 }
