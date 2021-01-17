@@ -132,6 +132,12 @@
                             <span>Laporan</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="index.html" class="items">
+                            <i class="fa fa-user"></i>
+                            <span>Admin</span>
+                        </a>
+                    </li>
 
 
                     <p class="menu">Pengaturan</p>
