@@ -21,6 +21,8 @@
     <!-- Icon LineAwesome CSS-->
     <link rel="stylesheet" href="{{ asset('/assets/vendors/lineawesome/css/line-awesome.min.css') }}">
 
+    <link  href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -132,12 +134,15 @@
                             <span>Laporan</span>
                         </a>
                     </li>
+
+                    @role('super admin')
                     <li>
-                        <a href="index.html" class="items">
+                        <a href="{{ route('admin.admin') }}" class="items">
                             <i class="fa fa-user"></i>
                             <span>Admin</span>
                         </a>
                     </li>
+                    @endrole
 
 
                     <p class="menu">Pengaturan</p>
@@ -244,6 +249,7 @@
     <script src="{{ asset('assets/vendors/bootstrap/js/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/script.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 </body>
 
 </html>

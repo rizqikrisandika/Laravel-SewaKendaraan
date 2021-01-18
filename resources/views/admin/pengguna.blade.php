@@ -54,6 +54,11 @@
                                         <input type="email" class="form-control" name="email" id="email"
                                             placeholder="nama@sewa.com" value="{{ old('email') }}">
                                     </div>
+                                    <div class="form-group">
+                                        <label for="email">No Hp</label>
+                                        <input type="text" class="form-control" name="nohp" id="nohp"
+                                            placeholder="08121212XX" maxlength="12" value="{{ old('nohp') }}">
+                                    </div>
                                      <div class="form-group">
                                          <label for="alamat">Alamat</label>
                                          <input type="text" class="form-control" name="alamat"
@@ -84,31 +89,71 @@
                                             <th>NIK</th>
                                             <th>NAMA</th>
                                             <th>EMAIL</th>
+                                            <th>NOHP</th>
                                             <th>JK</th>
                                             <th>ALAMAT</th>
                                             <th>AKSI</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{-- @foreach ($kendaraan as $no => $data) --}}
+                                        @foreach ($user as $no => $data)
                                         <tr>
-                                            <td class="text-bold-500"></td>
+                                            <td class="text-bold-500">{{ $user->firstItem()+$no }}</td>
                                             <td><img src="" style="width: 100px"
-                                                    alt=""></td>
-                                            <td class="text-bold-500"></td>
-                                            <td class="text-bold-500"></td>
-                                            <td></td>
-                                            <td class="text-bold-500"></td>
+                                                    alt="">{{ $data->nik }}</td>
+                                            <td class="text-bold-500">{{ $data->name }}</td>
+                                            <td class="text-bold-500">{{ $data->email }}</td>
+                                            <td class="text-bold-500">{{ $data->phone }}</td>
+                                            <td>{{ $data->gender }}</td>
+                                            <td class="text-bold-500">{{ $data->address }}</td>
                                             <td>
-
+                                                <button class="btn btn-sm btn-danger" data-toggle="modal"
+                                                    data-target="#modalHapusPengguna{{ $data->id }}"><i
+                                                        class="fa fa-trash"></i></button>
                                             </td>
                                         </tr>
 
-                                        {{-- @endforeach --}}
+
+                                        {{-- Modal Hapus --}}
+
+                                        <div class="modal fade" id="modalHapusPengguna{{ $data->id }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Konfirmasi
+                                                            Hapus
+                                                            Pengguna</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Apakah anda yakin untuk menghapus pengguna {{ $data->name }}?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        {{-- form --}}
+                                                        <form
+                                                            action="{{ route('hapuspengguna.admin',['id'=>$data->id]) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Tidak</button>
+                                                            <button type="submit" class="btn btn-danger">Ya</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{-- endModal --}}
+
+                                        @endforeach
                                     </tbody>
                                 </table>
 
-                                {{-- {{ $kendaraan->links() }} --}}
+                                {{ $user->links() }}
                             </div>
                         </div>
                     </div>

@@ -13,7 +13,8 @@ class DashboardController extends Controller
     {
         $kendaraan = Kendaraan::count();
         $user = User::role('user')->count();
+        $admin = User::role('admin')->count();
 
-        return view('admin.dashboard',compact('kendaraan', 'user'));
+        return view('admin.dashboard',compact('kendaraan', 'user','admin'));
     }
 }

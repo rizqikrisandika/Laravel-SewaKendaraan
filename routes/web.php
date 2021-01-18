@@ -26,6 +26,8 @@ Route::group(['middleware' => ['auth','role:super admin|admin']], function () {
 
     Route::get('/dashboard/pengguna', 'PenggunaController@index')->name('pengguna.admin');
     Route::post('/dashboard/pengguna', 'PenggunaController@store')->name('tambahpengguna.admin');
+    Route::put('/dashboard/pengguna/{id}', 'PenggunaController@update')->name('ubahpengguna.admin');
+    Route::delete('/dashboard/pengguna/{id}', 'PenggunaController@destory')->name('hapuspengguna.admin');
 
     Route::get('dashboard/kendaraan', 'KendaraanController@index')->name('kendaraan.admin');
     Route::post('dashboard/kendaraan', 'KendaraanController@store')->name('tambahkendaraan.admin');
@@ -38,6 +40,11 @@ Route::group(['middleware' => ['auth','role:super admin|admin']], function () {
     Route::delete('dashboard/kategori/{slug}', 'KategoriController@destroy')->name('hapuskategori.admin');
 });
 
+Route::group(['middleware' => ['auth','role:super admin']], function () {
+    Route::get('/dashboard/admin', 'AdminController@index')->name('admin.admin');
+    Route::post('/dashboard/admin', 'AdminController@store')->name('tambahadmin.admin');
+    Route::delete('/dashboard/admin/{id}', 'AdminController@destory')->name('hapusadmin.admin');
+});
 
 
 

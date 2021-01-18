@@ -71,7 +71,22 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4 d-flex align-items-center">
+                                <i class="las la-id-card  icon-home bg-danger text-light"></i>
+                            </div>
+                            <div class="col-8">
+                                <p>Admin</p>
+                                <h5>{{ $admin }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
 
