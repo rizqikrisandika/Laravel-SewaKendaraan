@@ -62,7 +62,7 @@
                         </div>
                         <div class="dropdown-menu" aria-labelledby="dropdownProfile">
 
-                            <a class="dropdown-item" href="profile.html">
+                            <a class="dropdown-item" href="{{ route('profil.admin') }}">
                                 <i class="las la-user mr-2"></i> My Profile
                             </a>
 

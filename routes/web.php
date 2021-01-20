@@ -24,6 +24,10 @@ Route::group(['middleware' => ['auth','role:super admin|admin']], function () {
 
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard.admin');
 
+    Route::get('/dashboard/profil', 'AdminController@profil')->name('profil.admin');
+    Route::put('/dashboard/profil/ubah', 'AdminController@updateProfil')->name('ubahprofil.admin');
+    Route::put('/dashboard/profil/password', 'AdminController@ubahPassword')->name('ubahpassword.admin');
+
     Route::get('/dashboard/pengguna', 'PenggunaController@index')->name('pengguna.admin');
     Route::post('/dashboard/pengguna', 'PenggunaController@store')->name('tambahpengguna.admin');
     Route::put('/dashboard/pengguna/{id}', 'PenggunaController@update')->name('ubahpengguna.admin');

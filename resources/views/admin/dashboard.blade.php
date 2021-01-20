@@ -9,6 +9,26 @@
 
         <div class="row">
 
+
+            <div class="col-12 p-0">
+                <div class="card-body">
+                    <div class="alert alert-primary d-block" role="alert">
+                        <h3 class="alert-heading">
+                            Selamat Datang
+                            @role('super admin')
+                            Super Admin
+                            @else
+                            Admin
+                            @endrole
+                        </h3>
+                        <h5 class="alert-heading">
+                            {{ Auth::user()->name }}
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+
             <div class="col-md-6 col-lg-3">
                 <div class="card">
                     <div class="card-body">
