@@ -243,6 +243,9 @@
 
     <div class="loader-overlay"></div>
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    @include('sweet::alert')
+
     <!-- Library Javascipt-->
     <script src="{{ asset('assets/vendors/bootstrap/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

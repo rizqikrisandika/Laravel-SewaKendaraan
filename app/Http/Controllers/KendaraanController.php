@@ -80,6 +80,8 @@ class KendaraanController extends Controller
         $kendaraan->user_id = $user_id;
         $kendaraan->save();
 
+        alert()->success('Tambah Kendaraan', 'Sukses');
+
         return redirect()->back();
     }
 
@@ -160,6 +162,8 @@ class KendaraanController extends Controller
             $kendaraan->save();
         }
 
+        alert()->success('Ubah Kendaraan', 'Sukses');
+
         return redirect()->back();
     }
 
@@ -174,6 +178,8 @@ class KendaraanController extends Controller
         $kendaraan = Kendaraan::where('slug',$slug)->first();
         Storage::disk('public')->delete($kendaraan->gambar);
         Kendaraan::where('slug',$slug)->delete();
+
+        alert()->success('Hapus Kendaraan', 'Sukses');
 
         return redirect()->back();
     }

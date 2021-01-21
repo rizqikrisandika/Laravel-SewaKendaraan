@@ -64,7 +64,7 @@
 
 
                               <div class="text-right mt-3">
-                                  <button type="submit" class="btn btn-primary">Save changes</button>&nbsp;
+                                  <button type="submit" class="btn btn-primary">Simpan</button>&nbsp;
                               </div>
                             </form>
 

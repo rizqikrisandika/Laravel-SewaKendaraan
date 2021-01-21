@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Rules\MatchOldPassword;
+use Illuminate\Support\Facades\Validator;
 
 use App\User;
 
@@ -20,12 +20,20 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required|string|min:5',
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required|string|max:30',
             'jk' => 'required',
             'email' => 'required|unique:users,email|email',
             'password' => 'required|string|min:8'
         ]);
+
+        if($validator->fails())
+        {
+
+            alert()->error('Menambah Admin', 'Gagal!');
+
+            return redirect()->back();
+        }
 
         $admin = new User();
         $admin->name = $request->nama;
@@ -35,14 +43,16 @@ class AdminController extends Controller
         $admin->assignRole('admin');
         $admin->save();
 
+        alert()->success('Tambah Admin', 'Sukses');
+
         return redirect()->back();
     }
 
     public function destory($id)
     {
-        $admin = User::where('id',$id)->first();
+        User::where('id',$id)->delete();
 
-        $admin->delete();
+        alert()->success('Hapus Admin', 'Sukses');
 
         return redirect()->back();
     }
@@ -58,14 +68,24 @@ class AdminController extends Controller
     public function updateProfil(Request $request)
     {
 
-        $request->validate([
-            'nama' => 'required|string|min:5|max:30'
+        $validator = Validator::make($request->all(),[
+            'nama' => 'required|string|max:30'
         ]);
+
+        if($validator->fails())
+        {
+
+            alert()->error('Ubah Profil', 'Gagal!');
+
+            return redirect()->back();
+        }
 
         $admin = User::where('id', Auth::user()->id)->first();
 
         $admin->name = $request->nama;
         $admin->save();
+
+        alert()->success('Ubah Profil', 'Sukses');
 
         return redirect()->back();
     }
@@ -73,16 +93,26 @@ class AdminController extends Controller
     public function ubahPassword(Request $request)
     {
 
-        $request->validate([
+        $validator = Validator::make($request->all(),[
             'password_lama' => 'required', new MatchOldPassword,
             'password_baru' => 'required|min:8',
             'konfir_password_baru' => 'same:password_baru'
         ]);
 
+        if($validator->fails())
+        {
+
+            alert()->error('Ubah Password', 'Gagal!');
+
+            return redirect()->back();
+        }
+
         $admin = User::where('id', Auth::user()->id)->first();
 
         $admin->password = bcrypt($request->password_baru);
         $admin->save();
+
+        alert()->success('Ubah Password', 'Sukses');
 
         return redirect()->back();
 

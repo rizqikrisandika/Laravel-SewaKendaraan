@@ -6,7 +6,7 @@ use App\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class KategoriCOntroller extends Controller
+class KategoriController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -53,6 +53,8 @@ class KategoriCOntroller extends Controller
         $kategori->slug = Str::slug($request->nama);
         $kategori->save();
 
+        alert()->success('Tambah Kategori', 'Sukses');
+
         return redirect()->route('kategori.admin');
     }
 
@@ -92,6 +94,8 @@ class KategoriCOntroller extends Controller
         $kategori->slug = Str::slug($request->nama);
         $kategori->save();
 
+        alert()->success('Ubah Kategori', 'Sukses');
+
         return redirect()->back();
     }
 
@@ -105,6 +109,8 @@ class KategoriCOntroller extends Controller
     {
         $kategori = Kategori::where('slug',$slug)->first();
         $kategori->delete();
+
+        alert()->success('Hapus Kategori', 'Sukses');
 
         return redirect()->back();
     }
