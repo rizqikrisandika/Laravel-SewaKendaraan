@@ -14,7 +14,6 @@
                 <div class="card-body">
                     <div class="alert alert-primary d-block" role="alert">
                         <h3 class="alert-heading">
-                            Selamat Datang
                             @role('super admin')
                             Super Admin
                             @else

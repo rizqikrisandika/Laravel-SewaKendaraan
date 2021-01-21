@@ -133,4 +133,12 @@ class KendaraanController extends Controller
 
         return redirect()->back();
     }
+
+    public function cetak()
+    {
+        $title = "Laporan Data Seluruh Kendaraan";
+        $kendaraan = Kendaraan::all();
+
+        return view('admin.cetak-kendaraan',compact('kendaraan','title'));
+    }
 }

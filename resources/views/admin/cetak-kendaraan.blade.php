@@ -1,20 +1,22 @@
+<!doctype html>
+<html lang="en">
 
-<style>
-    table{
-        position: relative;
-        border: 1px solid black;
-    }
+<head>
+    <title>Bukti Pemesanan</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    .title{
-        text-align: center;
-    }
-</style>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
 
-<h4 class="title">{{ $title }}</h4>
+<h4 class="text-center">{{ $title }}</h4>
 
 <hr>
 
-<table class="table">
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>NO</th>
@@ -30,8 +32,7 @@
         @foreach ($kendaraan as $no => $data)
         <tr>
             <td class="text-bold-500">{{ $loop->iteration }}</td>
-            <td><img src="{{ url(Storage::url($data->gambar)) }}" style="width: 100px"
-                    alt=""></td>
+            <td><img src="{{ url(Storage::url($data->gambar)) }}" style="width: 100px" alt=""></td>
             <td class="text-bold-500">{{ $data->nama }}</td>
             <td class="text-bold-500">{{ $data->plat }}</td>
             <td>{{ $data->kategori->nama }}</td>
@@ -39,9 +40,9 @@
             </td>
             <td>
                 @if ($data->status == 1)
-                <span class="badge badge-success">Tersedia</span>
+                Tersedia
                 @else
-                <span class="badge badge-danger">Disewa</span>
+                Disewa
                 @endif
             </td>
         </tr>
@@ -52,4 +53,9 @@
 
 <script type="text/javascript">
     window.print();
+
 </script>
+
+</body>
+
+</html>

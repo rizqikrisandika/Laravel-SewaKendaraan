@@ -11,10 +11,15 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Tabel Data Kendaraan</h4>
-                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#modalTambahKendaraan">
-                            + Kendaraan
-                        </button>
+                        <div>
+                            <a type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#modalTambahKendaraan">
+                                + Kendaraan
+                            </a>
+                            <a name="" id="" class="btn btn-success" href="{{ route('cetakkendaraan.admin') }}" role="button"><i
+                                    class="fas fa-print"></i></a>
+                            <a type="button" class="btn btn-warning" onClick="window.location.reload();"><i class="fas fa-sync"></i></a>
+                        </div>
                         {{-- Modal --}}
                         <div class="modal fade" id="modalTambahKendaraan" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -144,8 +149,7 @@
                                                                 @csrf
                                                                 @method('put')
                                                                 <div class="col">
-                                                                    <label
-                                                                        for="exampleFormControlInput1">Gambar</label>
+                                                                    <label for="exampleFormControlInput1">Gambar</label>
                                                                     <div class="form-group">
                                                                         <img src="{{ url(Storage::url($data->gambar)) }}"
                                                                             style="width: 20vw" alt="">
