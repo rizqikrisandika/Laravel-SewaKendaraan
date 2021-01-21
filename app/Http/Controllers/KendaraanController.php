@@ -12,11 +12,12 @@ use App\Kategori;
 
 class KendaraanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $kendaraan = Kendaraan::orderBy('updated_at','desc')->paginate(10);
@@ -26,22 +27,6 @@ class KendaraanController extends Controller
         return view('admin.kendaraan',compact('kendaraan','kategori'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $rules = [
@@ -85,35 +70,6 @@ class KendaraanController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Kendaraan  $kendaraan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Kendaraan $kendaraan)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Kendaraan  $kendaraan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Kendaraan $kendaraan)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Kendaraan  $kendaraan
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Kendaraan $kendaraan, $slug)
     {
         $rules = [
@@ -167,12 +123,6 @@ class KendaraanController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Kendaraan  $kendaraan
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Kendaraan $kendaraan, $slug)
     {
         $kendaraan = Kendaraan::where('slug',$slug)->first();

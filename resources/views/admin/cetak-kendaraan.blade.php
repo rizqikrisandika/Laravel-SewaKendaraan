@@ -4,7 +4,15 @@
         position: relative;
         border: 1px solid black;
     }
+
+    .title{
+        text-align: center;
+    }
 </style>
+
+<h4 class="title">{{ $title }}</h4>
+
+<hr>
 
 <table class="table">
     <thead>

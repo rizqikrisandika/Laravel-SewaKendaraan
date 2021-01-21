@@ -11,6 +11,12 @@ use App\User;
 
 class AdminController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $admin = User::role('admin')->paginate(10);

@@ -45,6 +45,10 @@ Route::group(['middleware' => ['auth','role:super admin|admin']], function () {
 
     Route::get('dashboard/laporan/kendaraan', 'LaporanController@index_kendaraan')->name('laporankendaraan.admin');
     Route::post('dashboard/laporan/kendaraan/tanggal', 'LaporanController@laporan_tanggal_kendaraan')->name('tgl_laporankendaraan.admin');
+    Route::get('dashboard/laporan/kendaraan/harian', 'LaporanController@laporan_harian_kendaraan')->name('hr_laporankendaraan.admin');
+    Route::get('dashboard/laporan/kendaraan/mingguan', 'LaporanController@laporan_mingguan_kendaraan')->name('mg_laporankendaraan.admin');
+    Route::get('dashboard/laporan/kendaraan/bulanan', 'LaporanController@laporan_bulanan_kendaraan')->name('bl_laporankendaraan.admin');
+    Route::get('dashboard/laporan/kendaraan/tahunan', 'LaporanController@laporan_tahunan_kendaraan')->name('th_laporankendaraan.admin');
 });
 
 Route::group(['middleware' => ['auth','role:super admin']], function () {

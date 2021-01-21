@@ -49,47 +49,44 @@
             </div>
             <div class="col-12">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-3">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Berdasarkan Harian</h4>
+                                <h4 class="card-title">Harian</h4>
 
-                                <form action="{{ route('tambahkategori.admin') }}" method="post">
-                                    @csrf
-
-                                    <button class="btn btn-primary float-right d-block"><i class="fas fa-print"></i></button>
-                                </form>
+                                    <a href="{{ route('hr_laporankendaraan.admin') }}" class="btn btn-primary float-right d-block"><i class="fas fa-print"></i></a>
 
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-3">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Berdasarkan Bulan</h4>
+                                <h4 class="card-title">Mingguan</h4>
 
-                                <form action="{{ route('tambahkategori.admin') }}" method="post">
-                                    @csrf
-
-                                    <button class="btn btn-primary float-right d-block"><i class="fas fa-print"></i></button>
-                                </form>
+                                    <a href="{{ route('mg_laporankendaraan.admin') }}" class="btn btn-primary float-right d-block"><i class="fas fa-print"></i></a>
 
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-3">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Berdasarkan Tahun</h4>
+                                <h4 class="card-title">Bulan</h4>
 
-                                <form action="{{ route('tambahkategori.admin') }}" method="post">
-                                    @csrf
+                                    <a href="{{ route('bl_laporankendaraan.admin') }}" class="btn btn-primary float-right d-block"><i class="fas fa-print"></i></a>
 
-                                    <button class="btn btn-primary float-right d-block"><i class="fas fa-print"></i></button>
-                                </form>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Tahun</h4>
+                                    <a href="{{ route('th_laporankendaraan.admin') }}" class="btn btn-primary float-right d-block"><i class="fas fa-print"></i></a>
                             </div>
                         </div>
                     </div>
