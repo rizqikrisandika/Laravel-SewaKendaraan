@@ -128,12 +128,26 @@
                             <span>Pengguna</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="index.html" class="items">
-                            <i class="fa fa-book"></i>
+                    <li id="headingTwo">
+                        <a href="onclick();" class="submenu-items" data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-book"></i>
                             <span>Laporan</span>
+                            <i class="fas la-angle-right"></i>
                         </a>
                     </li>
+                    <div id="collapseTwo" class="collapse submenu" aria-labelledby="headingTwo"
+                        data-parent="#sidebar-items">
+                        <ul>
+                            <li>
+                                <a href="{{ route('laporankendaraan.admin') }}">Kendaraan</a>
+                            </li>
+
+                            <li>
+                                <a href="components-badge.html">Pemesanan</a>
+                            </li>
+                        </ul>
+                    </div>
 
                     @role('super admin')
                     <li>
@@ -253,6 +267,7 @@
     <script src="{{ asset('assets/js/script.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 </body>
 
 </html>

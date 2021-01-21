@@ -42,6 +42,9 @@ Route::group(['middleware' => ['auth','role:super admin|admin']], function () {
     Route::post('dashboard/kategori', 'KategoriController@store')->name('tambahkategori.admin');
     Route::put('dashboard/kategori/{slug}', 'KategoriController@update')->name('updatekategori.admin');
     Route::delete('dashboard/kategori/{slug}', 'KategoriController@destroy')->name('hapuskategori.admin');
+
+    Route::get('dashboard/laporan/kendaraan', 'LaporanController@index_kendaraan')->name('laporankendaraan.admin');
+    Route::post('dashboard/laporan/kendaraan/tanggal', 'LaporanController@laporan_tanggal_kendaraan')->name('tgl_laporankendaraan.admin');
 });
 
 Route::group(['middleware' => ['auth','role:super admin']], function () {
