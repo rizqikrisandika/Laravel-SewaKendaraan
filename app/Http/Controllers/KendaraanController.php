@@ -141,4 +141,13 @@ class KendaraanController extends Controller
 
         return view('admin.cetak-kendaraan',compact('kendaraan','title'));
     }
+
+    public function index_kategori($id)
+    {
+        $kategori = Kategori::all();
+
+        $kendaraan = Kendaraan::where('kategori_id',$id)->paginate(10);
+
+        return view('admin.kendaraan',compact('kategori','kendaraan'));
+    }
 }

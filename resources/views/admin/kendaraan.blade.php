@@ -18,19 +18,21 @@
                             </a>
                             <a name="" id="" class="btn btn-success" href="{{ route('cetakkendaraan.admin') }}"
                                 role="button"><i class="fas fa-print"></i></a>
-                            <a type="button" class="btn btn-warning" onClick="window.location.reload();"><i
+                            <a href="{{ route('kendaraan.admin') }}" type="button" class="btn btn-warning" ><i
                                     class="fas fa-sync"></i></a>
 
-                                    <div class="btn-group">
-                                        <a type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                          Kategori
-                                        </a>
-                                        <div class="dropdown-menu">
-                                          @foreach ($kategori as $kat)
-                                            <a class="dropdown-item" href="#">{{ $kat->nama }}</a>
-                                          @endforeach
-                                        </div>
-                                      </div>
+                            <div class="btn-group">
+                                <a type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    Kategori
+                                </a>
+                                <div class="dropdown-menu">
+                                    @foreach ($kategori as $kat)
+                                    <a class="dropdown-item"
+                                        href="{{ route('kat_kendaraan.admin',['id'=>$kat->id]) }}">{{ $kat->nama }}</a>
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
                         {{-- Modal --}}
                         <div class="modal fade" id="modalTambahKendaraan" tabindex="-1" role="dialog"
