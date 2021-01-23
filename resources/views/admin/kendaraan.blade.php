@@ -17,9 +17,9 @@
                                 + Kendaraan
                             </a>
                             <a name="" id="" class="btn btn-success" href="{{ route('cetakkendaraan.admin') }}"
-                                role="button"><i class="fas fa-print"></i></a>
+                                role="button"><i class="fas fa-print"></i> Semua</a>
                             <a href="{{ route('kendaraan.admin') }}" type="button" class="btn btn-warning" ><i
-                                    class="fas fa-sync"></i></a>
+                                    class="fas fa-sync"></i> Semua</a>
 
                             <div class="btn-group">
                                 <a type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"
@@ -29,11 +29,14 @@
                                 <div class="dropdown-menu">
                                     @foreach ($kategori as $kat)
                                     <a class="dropdown-item"
-                                        href="{{ route('kat_kendaraan.admin',['id'=>$kat->id]) }}">{{ $kat->nama }}</a>
+                                        href="{{ route('kat_kendaraan.admin',['slug'=>$kat->slug]) }}">{{ $kat->nama }}</a>
                                     @endforeach
                                 </div>
                             </div>
                         </div>
+
+
+
                         {{-- Modal --}}
                         <div class="modal fade" id="modalTambahKendaraan" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -97,8 +100,10 @@
                         </div>
                         {{-- endmodal --}}
                     </div>
+
                     <div class="card-content">
                         <div class="card-body">
+                            <h4 class="card-title">{{ $title }}</h4>
                             <!-- Table with outer spacing -->
                             <div class="table-responsive">
                                 <table class="table">
@@ -115,7 +120,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($kendaraan as $no => $data)
+                                        @forelse ($kendaraan as $no => $data)
                                         <tr>
                                             <td class="text-bold-500">{{ $kendaraan->firstItem()+$no }}</td>
                                             <td><img src="{{ url(Storage::url($data->gambar)) }}" style="width: 100px"
@@ -268,8 +273,11 @@
                                             </div>
                                         </div>
                                         {{-- endModal --}}
-
-                                        @endforeach
+                                        @empty
+                                            <tr>
+                                                <td colspan="4">Data tidak ditemukan</td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
 

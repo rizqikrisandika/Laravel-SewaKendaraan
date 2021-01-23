@@ -22,9 +22,10 @@ class KendaraanController extends Controller
     {
         $kendaraan = Kendaraan::orderBy('updated_at','desc')->paginate(10);
         $kategori = Kategori::all();
+        $title = "Semua Kategori Kendaraan";
 
 
-        return view('admin.kendaraan',compact('kendaraan','kategori'));
+        return view('admin.kendaraan',compact('kendaraan','kategori','title'));
     }
 
     public function store(Request $request)
@@ -142,12 +143,19 @@ class KendaraanController extends Controller
         return view('admin.cetak-kendaraan',compact('kendaraan','title'));
     }
 
-    public function index_kategori($id)
+    public function index_kategori($slug)
     {
         $kategori = Kategori::all();
+        $kategori_nama = Kategori::where('slug',$slug)->get('nama');
 
-        $kendaraan = Kendaraan::where('kategori_id',$id)->paginate(10);
+        foreach($kategori_nama as $kat_nama)
+        {
+            $kat_nama->nama;
+        }
 
-        return view('admin.kendaraan',compact('kategori','kendaraan'));
+        $kendaraan = Kategori::where('slug',$slug)->first()->kendaraan()->paginate(10);
+        $title = "Kategori Kendaraan ".$kat_nama->nama;
+
+        return view('admin.kendaraan',compact('kategori','kendaraan','title'));
     }
 }
