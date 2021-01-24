@@ -19,4 +19,24 @@ class PemesananController extends Controller
 
         $hitung_hari = $dari_hitung->diffInDays($sampai_hitung)+1;
     }
+
+    public function update()
+    {
+
+    }
+
+    public function destory()
+    {
+
+    }
+
+    public function cetakPemesanan()
+    {
+
+    }
+
+    public function cetakBukti()
+    {
+
+    }
 }

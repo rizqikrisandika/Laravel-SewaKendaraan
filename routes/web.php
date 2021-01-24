@@ -51,6 +51,12 @@ Route::group(['middleware' => ['auth','role:super admin|admin']], function () {
     Route::get('dashboard/laporan/kendaraan/mingguan', 'LaporanController@laporan_mingguan_kendaraan')->name('mg_laporankendaraan.admin');
     Route::get('dashboard/laporan/kendaraan/bulanan', 'LaporanController@laporan_bulanan_kendaraan')->name('bl_laporankendaraan.admin');
     Route::get('dashboard/laporan/kendaraan/tahunan', 'LaporanController@laporan_tahunan_kendaraan')->name('th_laporankendaraan.admin');
+
+    Route::get('dashboad/pemesanan', 'PemesananController@index')->name('pemesanan.admin');
+    Route::post('dashboad/pemesanan', 'PemesananController@store')->name('tambahpemesanan.admin');
+    Route::put('dashboad/pemesanan/{id}', 'PemesananController@update')->name('ubahpemesanan.admin');
+    Route::delete('dashboad/pemesanan/{id}', 'PemesananController@destory')->name('hapuspemesanan.admin');
+    Route::get('dashboad/pemesanan/semua', 'PemesananController@cetakPemesanan')->name('cetakpemesanan.admin');
 });
 
 Route::group(['middleware' => ['auth','role:super admin']], function () {
