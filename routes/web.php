@@ -57,6 +57,11 @@ Route::group(['middleware' => ['auth','role:super admin']], function () {
     Route::get('/dashboard/admin', 'AdminController@index')->name('admin.admin');
     Route::post('/dashboard/admin', 'AdminController@store')->name('tambahadmin.admin');
     Route::delete('/dashboard/admin/{id}', 'AdminController@destory')->name('hapusadmin.admin');
+
+    Route::get('/dashboard/pengaturan/whatsapp', 'PengaturanController@whatsappIndex')->name('wa-index.admin');
+    Route::post('/dashboard/pengaturan/whatsapp', 'PengaturanController@storeWhatsapp')->name('wa-tambah.admin');
+    Route::put('/dashboard/pengaturan/whatsapp/{id}', 'PengaturanController@updateWhatsapp')->name('wa-ubah.admin');
+    Route::delete('/dashboard/pengaturan/whatsapp/{id}', 'PengaturanController@deleteWhatsapp')->name('wa-hapus.admin');
 });
 
 

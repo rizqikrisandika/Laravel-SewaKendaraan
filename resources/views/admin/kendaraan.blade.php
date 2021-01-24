@@ -275,7 +275,7 @@
                                         {{-- endModal --}}
                                         @empty
                                             <tr>
-                                                <td colspan="4">Data tidak ditemukan</td>
+                                                <td class="text-center" colspan="8">Data kosong / tidak ditemukan</td>
                                             </tr>
                                         @endforelse
                                     </tbody>

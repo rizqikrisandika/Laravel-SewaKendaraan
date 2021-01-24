@@ -156,7 +156,6 @@
                             <span>Admin</span>
                         </a>
                     </li>
-                    @endrole
 
 
                     <p class="menu">Pengaturan</p>
@@ -165,68 +164,21 @@
                         <a href="onclick();" class="submenu-items" data-toggle="collapse" data-target="#collapseOne"
                             aria-expanded="true" aria-controls="collapseOne">
                             <i class="fas la-cog"></i>
-                            <span>Components</span>
+                            <span>Pengaturan</span>
                             <i class="fas la-angle-right"></i>
                         </a>
                     </li>
                     <div id="collapseOne" class="collapse submenu" aria-labelledby="headingOne"
-                        data-parent="#sidebar-items">
-                        <ul>
+                    data-parent="#sidebar-items">
+                    <ul>
 
-                            <li>
-                                <a href="components-alerts.html">Alerts</a>
-                            </li>
+                        <li>
+                            <a href="{{ route('wa-index.admin') }}">Whatsapp</a>
+                        </li>
 
-                            <li>
-                                <a href="components-badge.html">Badge</a>
-                            </li>
-
-                            <li>
-                                <a href="components-breadcrumb.html">Breadcrumb</a>
-                            </li>
-
-                            <li>
-                                <a href="components-buttons.html">Buttons</a>
-                            </li>
-
-                            <li>
-                                <a href="components-card.html">Card</a>
-                            </li>
-
-                            <li>
-                                <a href="components-copllapse.html">Collapse</a>
-                            </li>
-
-                            <li>
-                                <a href="components-dropdown.html">Dropdown</a>
-                            </li>
-
-                            <li>
-                                <a href="components-form.html">Form</a>
-                            </li>
-
-                            <li>
-                                <a href="components-listgroup.html">List Group</a>
-                            </li>
-
-                            <li>
-                                <a href="components-progress.html">Progress</a>
-                            </li>
-
-                            <li>
-                                <a href="components-table.html">Table</a>
-                            </li>
-
-                            <li>
-                                <a href="components-todolist.html">Todo List</a>
-                            </li>
-
-                            <li>
-                                <a href="components-typography.html">Typography</a>
-                            </li>
-
-                        </ul>
-                    </div>
+                    </ul>
+                </div>
+                @endrole
                 </ul>
             </div>
         </div>

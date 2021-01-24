@@ -1,6 +1,6 @@
 @extends('layouts.app2')
 
-@section('title','Kategori')
+@section('title','Pengturan Whatsapp')
 
 @section('dashboard')
 
@@ -10,31 +10,33 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Tabel Data Kategori</h4>
+                        <h4 class="card-title">Tabel Data Whatsapp</h4>
+                        @if (!$whatsapp->count())
                         <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#modalTambahKategori">
-                            + Kategori
+                            data-target="#modalTambahWhatsapp">
+                            + Whatsapp
                         </button>
+                        @endif
 
                         {{-- Modal Tambah --}}
-                        <div class="modal fade" id="modalTambahKategori" tabindex="-1" role="dialog"
+                        <div class="modal fade" id="modalTambahWhatsapp" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Kategori</h5>
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Whatsapp</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
                                         {{-- form --}}
-                                        <form action="{{ route('tambahkategori.admin') }}" method="post">
+                                        <form action="{{ route('wa-tambah.admin') }}" method="post">
                                             @csrf
                                             <div class="form-group">
-                                                <label for="nama">Nama</label>
-                                                <input type="text" class="form-control" name="nama" id="nama"
-                                                    value="{{ old('nama') }}" placeholder="Motor, Mobil, Shuttle, Bus">
+                                                <label for="nomor">Nomor</label>
+                                                <input type="text" class="form-control" name="nomor" id="nomor"
+                                                    value="{{ old('nomor') }}" placeholder="6295123456789" maxlength="13">
                                             </div>
                                     </div>
                                     <div class="modal-footer">
@@ -58,34 +60,34 @@
                                     <thead>
                                         <tr>
                                             <th>NO</th>
-                                            <th>NAMA</th>
+                                            <th>NOMOR</th>
                                             <th>AKSI</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($kategori as $no => $data)
+                                        @forelse ($whatsapp as $wa)
                                         <tr>
-                                            <td class="text-bold-500">{{ $kategori->firstItem()+$no }}</td>
-                                            <td>{{ $data->nama }}</td>
+                                            <td class="text-bold-500">{{ $loop->iteration }}</td>
+                                            <td>{{ $wa->nomor }}</td>
                                             <td class="text-bold-500">
                                                 <button class="btn btn-sm btn-warning" data-toggle="modal"
-                                                    data-target="#modalUbahKategori{{ $data->slug }}"><i class="fa fa-pen"></i></button>
+                                                    data-target="#modalUbahWhatsapp{{ $wa->id }}"><i class="fa fa-pen"></i></button>
 
                                                 <button type="submit" class="btn btn-sm btn-danger" data-toggle="modal"
-                                                    data-target="#modalHapusKategori{{ $data->slug }}"><i class="fa fa-trash"></i></button>
+                                                    data-target="#modalHapusWhatsapp{{ $wa->id }}"><i class="fa fa-trash"></i></button>
                                             </td>
 
                                         </tr>
 
                                         {{-- Modal Ubah --}}
 
-                                        <div class="modal fade" id="modalUbahKategori{{ $data->slug }}" tabindex="-1"
+                                        <div class="modal fade" id="modalUbahWhatsapp{{ $wa->id }}" tabindex="-1"
                                             role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLongTitle">Ubah
-                                                            Kategori</h5>
+                                                            Whatsapp</h5>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
@@ -94,14 +96,14 @@
                                                     <div class="modal-body">
                                                         {{-- form --}}
                                                         <form
-                                                            action="{{ route('updatekategori.admin',['slug'=>$data->slug]) }}"
+                                                            action="{{ route('wa-ubah.admin',['id'=>$wa->id]) }}"
                                                             method="post">
                                                             @csrf
                                                             @method('put')
                                                             <div class="form-group">
-                                                                <label for="nama">Nama</label>
-                                                                <input type="text" class="form-control" name="nama"
-                                                                    id="nama" value="{{ $data->nama }}"
+                                                                <label for="nomor">Nomor</label>
+                                                                <input type="text" class="form-control" name="nomor"
+                                                                    id="nomor" value="{{ $wa->nomor }}"
                                                                     placeholder="Motor, Mobil, Shuttle, Bus">
                                                             </div>
                                                     </div>
@@ -118,26 +120,26 @@
 
                                         {{-- Modal Hapus --}}
 
-                                        <div class="modal fade" id="modalHapusKategori{{ $data->slug }}" tabindex="-1"
+                                        <div class="modal fade" id="modalHapusWhatsapp{{ $wa->id }}" tabindex="-1"
                                             role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLongTitle">Konfirmasi
                                                             Hapus
-                                                            Kategori</h5>
+                                                            Whatsapp</h5>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        Apakah anda yakin untuk menghapus kategori {{ $data->nama }}?
+                                                        Apakah anda yakin untuk menghapus nomor {{ $wa->nomor }}?
                                                     </div>
                                                     <div class="modal-footer">
                                                         {{-- form --}}
                                                         <form
-                                                            action="{{ route('hapuskategori.admin',['slug'=>$data->slug]) }}"
+                                                            action="{{ route('wa-hapus.admin',['id'=>$wa->id]) }}"
                                                             method="post">
                                                             @csrf
                                                             @method('delete')
@@ -151,12 +153,20 @@
                                         </div>
                                         {{-- endModal --}}
 
-                                        @endforeach
+                                        @empty
+
+                                        <tr>
+                                            <td class="text-center" colspan="3">Data Kosong</td>
+                                        </tr>
+
+
+
+                                        @endforelse
 
                                     </tbody>
                                 </table>
 
-                                {{ $kategori->links() }}
+
                             </div>
                         </div>
                     </div>
