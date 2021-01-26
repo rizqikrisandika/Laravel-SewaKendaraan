@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 use App\Kendaraan;
 use App\Kategori;
@@ -22,7 +23,7 @@ class KendaraanController extends Controller
     {
         $kendaraan = Kendaraan::orderBy('updated_at','desc')->paginate(10);
         $kategori = Kategori::all();
-        $title = "Semua Kategori Kendaraan";
+        $title = "Semua Kendaraan";
 
 
         return view('admin.kendaraan',compact('kendaraan','kategori','title'));
@@ -30,21 +31,22 @@ class KendaraanController extends Controller
 
     public function store(Request $request)
     {
-        $rules = [
+
+
+        $validasi = Validator::make($request->all(),[
             'nama' => 'required|max:30|unique:kendaraan,nama',
             'kategori' => 'required',
-            'plat' => 'required|unique:kendaraan,plat',
+            'plat' => 'required|max:9|unique:kendaraan,plat',
             'harga' => 'required',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:4096'
-        ];
+            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:8192'
+        ]);
 
-        $message = [
-            'required' => ':attribute tidak boleh kosong!',
-            'unique' => 'Plat :attribute sudah digunakan!'
-        ];
+        if($validasi->fails())
+        {
+            alert()->error('Tambah Kendaraan', 'Gagal!');
 
-
-        $request->validate($rules, $message);
+            return redirect()->back();
+        }
 
         $user_id = Auth::user()->id;
 
@@ -73,20 +75,20 @@ class KendaraanController extends Controller
 
     public function update(Request $request, Kendaraan $kendaraan, $slug)
     {
-        $rules = [
+        $validasi = Validator::make($request->all(),[
             'nama' => 'required|max:30',
             'kategori' => 'required',
-            'plat' => 'required',
+            'plat' => 'required|max:9',
             'harga' => 'required',
-            'gambar' => 'image|mimes:jpeg,png,jpg|max:4096'
-        ];
+            'gambar' => 'image|mimes:jpeg,png,jpg|max:8192'
+        ]);
 
-        $message = [
-            'required' => ':attribute tidak boleh kosong!',
-            'unique' => 'Plat :attribute sudah digunakan!'
-        ];
+        if($validasi->fails())
+        {
+            alert()->error('Tambah Kendaraan', 'Gagal!');
 
-        $request->validate($rules, $message);
+            return redirect()->back();
+        }
 
         $kendaraan = Kendaraan::where('slug', $slug)->first();
 
@@ -154,7 +156,7 @@ class KendaraanController extends Controller
         }
 
         $kendaraan = Kategori::where('slug',$slug)->first()->kendaraan()->paginate(10);
-        $title = "Kategori Kendaraan ".$kat_nama->nama;
+        $title = "Kendaraan ".$kat_nama->nama;
 
         return view('admin.kendaraan',compact('kategori','kendaraan','title'));
     }

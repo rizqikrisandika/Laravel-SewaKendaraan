@@ -46,8 +46,8 @@ class User extends Authenticatable
         return $this->hasMany(Kendaraan::class);
     }
 
-    // public function role()
-    // {
-    //     return $this->belongsToMany(Role::class);
-    // }
+    public function pemesanan()
+    {
+        return $this->hasMany(Role::class);
+    }
 }

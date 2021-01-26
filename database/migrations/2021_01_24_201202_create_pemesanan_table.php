@@ -16,7 +16,7 @@ class CreatePemesananTable extends Migration
         Schema::create('pemesanan', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->string('kendaraan');
+            $table->string('kendaraan_id');
             $table->date('dari');
             $table->date('sampai');
             $table->integer('total_harga');

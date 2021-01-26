@@ -105,9 +105,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="" class="items">
+                        <a href="{{ route('pemesanan.admin') }}" class="items">
                             <i class="fa fa-clipboard"></i>
-                            <span>Pesanan</span>
+                            <span>Pemesanan</span>
                         </a>
                     </li>
                     <li>

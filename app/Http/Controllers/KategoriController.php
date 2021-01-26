@@ -16,7 +16,7 @@ class KategoriController extends Controller
 
     public function index()
     {
-        $kategori = Kategori::orderBy('updated_at','desc')->paginate(5);
+        $kategori = Kategori::latest()->paginate(5);
 
         return view('admin.kategori',compact('kategori'));
     }

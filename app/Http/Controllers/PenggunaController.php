@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\User;
 use Yajra\DataTables\Facades\DataTables;
@@ -17,7 +18,7 @@ class PenggunaController extends Controller
 
     public function index()
     {
-        $user = User::role('user')->paginate(10);
+        $user = User::role('user')->latest()->paginate(10);
 
         return view('admin.pengguna', compact('user'));
     }
@@ -34,6 +35,8 @@ class PenggunaController extends Controller
             'alamat' => 'required|string|max:100'
         ]);
 
+        $admin = Auth::user();
+
         $user = new User();
         $user->nik = $request->nik;
         $user->name = $request->nama;
@@ -41,8 +44,11 @@ class PenggunaController extends Controller
         $user->email = $request->email;
         $user->phone =  $request->nohp;
         $user->address =  $request->alamat;
+        $user->created_by = $admin->id;
         $user->assignRole('user');
         $user->save();
+
+        alert()->success('Tambah Pengguna', 'Sukses');
 
         return redirect()->back();
     }
@@ -57,6 +63,8 @@ class PenggunaController extends Controller
         $user = User::where('id',$id)->first();
 
         $user->delete();
+
+        alert()->success('Hapus Pengguna', 'Sukses');
 
         return redirect()->back();
     }

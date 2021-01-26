@@ -10,7 +10,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Tabel Data Kendaraan</h4>
+                        <h4 class="card-title">Data Kendaraan</h4>
                         <div>
                             <a type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#modalTambahKendaraan">
@@ -34,9 +34,13 @@
                                 </div>
                             </div>
                         </div>
-
-
-
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Tabel {{ $title }}</h4>
                         {{-- Modal --}}
                         <div class="modal fade" id="modalTambahKendaraan" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -71,7 +75,7 @@
                                                 <label for="exampleFormControlInput1">Plat Nomor</label>
                                                 <input type="text" class="form-control" name="plat"
                                                     id="exampleFormControlInput1" value="{{ old('plat') }}"
-                                                    placeholder="AB 1234 XX">
+                                                    placeholder="AB1234XX" maxlength="9">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput1">Harga/Hari</label>
@@ -103,7 +107,6 @@
 
                     <div class="card-content">
                         <div class="card-body">
-                            <h4 class="card-title">{{ $title }}</h4>
                             <!-- Table with outer spacing -->
                             <div class="table-responsive">
                                 <table class="table">
@@ -211,7 +214,7 @@
                                                                         <input type="text" class="form-control"
                                                                             name="plat" id="exampleFormControlInput1"
                                                                             value="{{ $data->plat }}"
-                                                                            placeholder="AB 1234 XX">
+                                                                            placeholder="AB1234XX" maxlength="9">
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label

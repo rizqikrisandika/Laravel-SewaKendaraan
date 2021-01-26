@@ -63,7 +63,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($kategori as $no => $data)
+                                        @forelse ($kategori as $no => $data)
                                         <tr>
                                             <td class="text-bold-500">{{ $kategori->firstItem()+$no }}</td>
                                             <td>{{ $data->nama }}</td>
@@ -150,8 +150,11 @@
                                             </div>
                                         </div>
                                         {{-- endModal --}}
-
-                                        @endforeach
+                                        @empty
+                                            <tr>
+                                                <td class="text-center" colspan="3">Data kosong / tidak ditemukan</td>
+                                            </tr>
+                                        @endforelse
 
                                     </tbody>
                                 </table>

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Kategori;
 use App\User;
+use App\Pemesanan;
 
 class Kendaraan extends Model
 {
@@ -20,5 +21,10 @@ class Kendaraan extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function pemesanan()
+    {
+        return $this->hasOne(Pemesanan::class);
     }
 }
