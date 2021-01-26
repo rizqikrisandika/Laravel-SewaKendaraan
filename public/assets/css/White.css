@@ -227,7 +227,7 @@ table thead {
 	width: 275px;
 	background-color: var(--default-sidebar);
 	box-shadow: 0 0 50px rgba(0, 0, 0, .1);
-	z-index: 9999;
+	z-index: 1;
 }
 
 .sidebar .logo {

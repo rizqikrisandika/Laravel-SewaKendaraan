@@ -58,7 +58,7 @@
                                             <div class="form-group">
                                                 <label for="pengguna">Pengguna</label>
                                                 <select class="form-control" name="pengguna" id="pengguna">
-                                                    <option selected>--Pilih--</option>
+                                                    <option value="0" selected disabled>--Pilih--</option>
                                                     @foreach ($user as $us)
                                                     <option value="{{ $us->id }}">{{ $us->name }}</option>
                                                     @endforeach
@@ -67,7 +67,7 @@
                                             <div class="form-group">
                                                 <label for="kendaraan">Kendaraan</label>
                                                 <select class="form-control" name="kendaraan" id="kendaraan">
-                                                    <option selected>--Pilih--</option>
+                                                    <option value="0" selected disabled>--Pilih--</option>
                                                     @foreach ($kendaraan as $ken)
                                                     <option value="{{ $ken->id }}">{{ $ken->nama }} (Rp.
                                                         {{ number_format($ken->harga,0,",",".")}}/Hari)</option>
@@ -145,18 +145,18 @@
                                             </td>
                                             <td>
                                                 <button class="btn btn-sm btn-danger" data-toggle="modal"
-                                                    data-target="#modalHapusPemesanan{{ $data->slug }}"><i
+                                                    data-target="#modalHapusPemesanan{{ $data->id }}"><i
                                                         class="fa fa-trash"></i></button>
                                                 <button class="btn btn-sm btn-primary" data-toggle="modal"
-                                                    data-target="#modalDetailPemesanan{{ $data->slug }}"><i
-                                                        class="fa fa-scope"></i></button>
+                                                    data-target="#modalDetailPemesanan{{ $data->id }}"><i
+                                                        class="fa fa-search"></i></button>
                                             </td>
                                         </tr>
 
 
                                         {{-- Modal Hapus --}}
 
-                                        <div class="modal fade" id="modalHapusPemesanan{{ $data->slug }}" tabindex="-1"
+                                        <div class="modal fade" id="modalHapusPemesanan{{ $data->id }}" tabindex="-1"
                                             role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
@@ -170,7 +170,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        Apakah anda yakin untuk menghapus Pemesanan {{ $data->nama }}?
+                                                        Apakah anda yakin untuk menghapus pemesanan oleh {{ $data->user->name }} dengan kendaraan {{ $data->kendaraan->nama }}?
                                                     </div>
                                                     <div class="modal-footer">
                                                         {{-- form --}}

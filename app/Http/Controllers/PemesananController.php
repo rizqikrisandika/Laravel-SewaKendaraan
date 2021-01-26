@@ -32,12 +32,21 @@ class PemesananController extends Controller
             'sampai' => 'required'
         ]);
 
+
         if($validasi->fails())
         {
+            if($request->pengguna || $request->kendaraan == 0)
+            {
+                alert()->error('Tambah Pemesanan', 'Gagal!');
+
+                return redirect()->back();
+            }
+
             alert()->error('Tambah Pemesanan', 'Gagal!');
 
             return redirect()->back();
         }
+
 
         $admin = Auth::user();
         $kendaraan = Kendaraan::where('id',$request->kendaraan)->first();
@@ -69,9 +78,18 @@ class PemesananController extends Controller
 
     }
 
-    public function destory()
+    public function destory($id)
     {
+        $pemesanan = Pemesanan::where('id',$id)->first();
+        $kendaraan = Kendaraan::where('id',$pemesanan->kendaraan_id)->first();
+        $pemesanan->delete();
 
+        $kendaraan->status = 1;
+        $kendaraan->update();
+
+        alert()->success('Hapus Pemesanan', 'Sukses');
+
+        return redirect()->back();
     }
 
     public function cetakPemesanan()
