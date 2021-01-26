@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-8">
                                 <p>Pesanan</p>
-                                <h5>3000</h5>
+                                <h5>{{ $pemesanan }}</h5>
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                             </div>
                             <div class="col-8">
                                 <p>Sales</p>
-                                <h5>5500</h5>
+                                <h5>0</h5>
                             </div>
                         </div>
                     </div>

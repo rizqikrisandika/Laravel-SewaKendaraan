@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Kendaraan;
 use App\User;
+use App\Pemesanan;
 
 class DashboardController extends Controller
 {
@@ -19,7 +20,8 @@ class DashboardController extends Controller
         $kendaraan = Kendaraan::count();
         $user = User::role('user')->count();
         $admin = User::role('admin')->count();
+        $pemesanan = Pemesanan::all()->count();
 
-        return view('admin.dashboard',compact('kendaraan', 'user','admin'));
+        return view('admin.dashboard',compact('kendaraan', 'user','admin','pemesanan'));
     }
 }
