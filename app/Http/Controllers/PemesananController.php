@@ -49,7 +49,21 @@ class PemesananController extends Controller
 
 
         $admin = Auth::user();
+
         $kendaraan = Kendaraan::where('id',$request->kendaraan)->first();
+
+        $get_pemesanan_id = Pemesanan::latest('id')->first();
+
+        $tgl = str_replace('-','',Carbon::now()->toDateString('d-m-Y'));
+
+        if($get_pemesanan_id == NULL)
+        {
+            $id = $get_pemesanan_id;
+            $invoice = "INV".$tgl."-".sprintf('%03d',$id+1);
+        }else{
+            $id = $get_pemesanan_id->id;
+            $invoice = "INV".$tgl."-".sprintf('%03d',$id+1);
+        }
 
         $dari_hitung = Carbon::parse($request->dari);
         $sampai_hitung = Carbon::parse($request->sampai);
@@ -57,11 +71,13 @@ class PemesananController extends Controller
         $total_harga = $kendaraan->harga * $hitung_hari;
 
         $pemesanan = new Pemesanan();
+        $pemesanan->invoice = $invoice;
         $pemesanan->user_id = $request->pengguna;
         $pemesanan->kendaraan_id = $request->kendaraan;
         $pemesanan->dari = $request->dari;
         $pemesanan->sampai = $request->sampai;
         $pemesanan->total_harga = $total_harga;
+        $pemesanan->status = 0;
         $pemesanan->created_by = $admin->id;
         $pemesanan->save();
 

@@ -10,11 +10,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Data Pemesanan</h4>
+                        <h4 class="card-title">Pemesanan</h4>
                         <a type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#modalTambahPemesanan">
-                            + Pemesanan
-                        </a>
+                            data-target="#modalTambahPemesanan"><i class="fas fa-plus"></i> Pemesanan</a>
                         <a name="" id="" class="btn btn-success" href="{{ route('cetakpemesanan.admin') }}"
                             role="button"><i class="fas fa-print"></i> Semua</a>
                         <a href="{{ route('pemesanan.admin') }}" type="button" class="btn btn-warning"><i
@@ -113,11 +111,13 @@
                                     <thead>
                                         <tr>
                                             <th>NO</th>
+                                            <th>INVOICE</th>
                                             <th>PENGGUNA</th>
                                             <th>KENDARAAN</th>
                                             <th>HARI</th>
                                             <th>TOTAL</th>
                                             <th>ALAMAT</th>
+                                            <th>STATUS</th>
                                             <th>AKSI</th>
                                         </tr>
                                     </thead>
@@ -125,6 +125,7 @@
                                         @forelse ($pemesanan as $no => $data)
                                         <tr>
                                             <td>{{ $pemesanan->firstItem()+$no }}</td>
+                                            <td>{{ $data->invoice }}</td>
                                             <td>{{ $data->user->name }}</td>
                                             <td>{{ $data->kendaraan->nama }}</td>
                                             <td>
@@ -144,6 +145,16 @@
                                                 @endif
                                             </td>
                                             <td>
+                                                @if($data->status == 0)
+                                                    <span class="badge badge-warning">Menyewa</span>
+                                                @else
+                                                    <span class="badge badge-success">Selesai</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-sm btn-success" data-toggle="modal"
+                                                    data-target="#modalCetakPemesanan{{ $data->id }}"><i
+                                                        class="fa fa-print"></i></button>
                                                 <button class="btn btn-sm btn-danger" data-toggle="modal"
                                                     data-target="#modalHapusPemesanan{{ $data->id }}"><i
                                                         class="fa fa-trash"></i></button>
@@ -152,6 +163,39 @@
                                                         class="fa fa-search"></i></button>
                                             </td>
                                         </tr>
+
+                                        {{-- Modal Hapus --}}
+
+                                        <div class="modal fade" id="modalCetakPemesanan{{ $data->id }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Konfirmasi Cetak Pemesanan</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Apakah anda yakin untuk mencetak pemesanan?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        {{-- form --}}
+                                                        <form
+                                                            action="{{ route('hapuspemesanan.admin',['id'=>$data->id]) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Tidak</button>
+                                                            <button type="submit" class="btn btn-success">Ya</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{-- endModal --}}
 
 
                                         {{-- Modal Hapus --}}
@@ -188,6 +232,8 @@
                                             </div>
                                         </div>
                                         {{-- endModal --}}
+
+
                                         @empty
                                         <tr>
                                             <td class="text-center" colspan="8">Data kosong / tidak ditemukan</td>

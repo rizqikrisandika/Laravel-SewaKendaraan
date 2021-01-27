@@ -9,7 +9,17 @@ use App\User;
 
 class Pemesanan extends Model
 {
-    protected $fillable = ['user_id','kendaraan_id','dari','sampai','total_harga','alamat','created_by'];
+    protected $fillable = [
+        'invoice',
+        'user_id',
+        'kendaraan_id',
+        'dari',
+        'sampai',
+        'total_harga',
+        'alamat',
+        'created_by',
+    ];
+
     protected $table = 'pemesanan';
 
     public function kendaraan()
