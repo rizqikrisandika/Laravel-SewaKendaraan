@@ -14,11 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
+
+Route::get('/', 'HomeController@index')->name('index');
 
 Route::group(['middleware' => ['auth','role:super admin|admin']], function () {
 
@@ -71,5 +70,3 @@ Route::group(['middleware' => ['auth','role:super admin']], function () {
 });
 
 
-
-Route::get('/home', 'HomeController@index')->name('home');

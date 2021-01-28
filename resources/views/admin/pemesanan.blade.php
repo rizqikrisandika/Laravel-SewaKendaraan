@@ -152,6 +152,9 @@
                                                 @endif
                                             </td>
                                             <td>
+                                                <button class="btn btn-sm btn-danger" data-toggle="modal"
+                                                    data-target="#modalHapusPemesanan{{ $data->id }}"><i
+                                                        class="fa fa-times"></i></button>
                                                 <button class="btn btn-sm btn-success" data-toggle="modal"
                                                     data-target="#modalCetakPemesanan{{ $data->id }}"><i
                                                         class="fa fa-print"></i></button>
